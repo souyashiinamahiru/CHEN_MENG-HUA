@@ -1,0 +1,269 @@
+/* plan.css — CP1406/CP5638 Assignment 1 Project Plan
+   Mobile-first | Readability | Print-friendly | Dark mode */
+
+/* ---------- CSS Reset (minimal) ---------- */
+*,
+
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+header {
+    background-color: #000;
+    text-align: center;
+    padding: 15px 0;
+}
+
+header img {
+    height: 160px;
+    width: auto;
+    display: inline-block;
+}
+
+nav {
+    background-color: #000;
+    text-align: center;
+    padding: 12px 0;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav li a {
+    color: #fff;
+    font-family: 'Francois One', sans-serif;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    color: #fbc531;
+}
+
+
+body,
+h1,
+h2,
+p,
+ul,
+li,
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Design Tokens ---------- */
+:root {
+    --bg: #fff;
+    --ink: #1b1b1b;
+    --muted: #6b7280;
+    --accent: #0f766e;
+    /* 青綠：沉穩但有重點 */
+    --accent-ink: #064e3b;
+    --card: #f8fafc;
+    /* 很淡的灰藍當底 */
+    --code-bg: #f1f5f9;
+    --border: #e5e7eb;
+    --maxw: 900px;
+    /* 文字行寬控制，最佳可讀性 */
+    --lh: 1.6;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b0f14;
+        --ink: #e5e7eb;
+        --muted: #a3a3a3;
+        --accent: #34d399;
+        --accent-ink: #10b981;
+        --card: #0f172a;
+        --code-bg: #111827;
+        --border: #1f2937;
+    }
+}
+
+/* ---------- Page ---------- */
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/var(--lh) "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+}
+
+/* 主要閱讀容器：左右留白、中央對齊 */
+.page {
+    max-width: var(--maxw);
+    margin: 56px auto 72px;
+    padding: 0 20px;
+}
+
+/* ---------- Headings ---------- */
+h1 {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: .2px;
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+h1+p {
+    margin-top: 8px;
+}
+
+h2 {
+    font-size: clamp(20px, 2.8vw, 24px);
+    font-weight: 800;
+    margin: 28px 0 10px;
+    line-height: 1.35;
+    /* 左條強調 */
+    padding-left: 12px;
+    border-left: 6px solid var(--accent);
+    color: var(--accent-ink);
+}
+
+/* ---------- Text & Lists ---------- */
+p {
+    margin: 10px 0 16px;
+}
+
+strong {
+    font-weight: 800;
+}
+
+em {
+    font-style: italic;
+}
+
+ul {
+    margin: 6px 0 16px 1.25rem;
+}
+
+li {
+    margin: 6px 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* 行內程式碼/連結樣式 */
+code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: .05rem .35rem;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: .95em;
+}
+
+a {
+    color: var(--accent-ink);
+    text-underline-offset: 2px;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* ---------- Sections / Cards ---------- */
+/* 讓長段落看起來有節奏感（很淡的底與圓角） */
+.section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0 18px;
+}
+
+/* ---------- Figures ---------- */
+figure {
+    margin: 10px 0 16px;
+}
+
+figure img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+}
+
+figcaption {
+    color: var(--muted);
+    font-size: .92rem;
+    margin-top: 8px;
+}
+
+/* ---------- Small layout helpers ---------- */
+.kv {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 8px 16px;
+}
+
+.kv>strong {
+    color: var(--muted);
+}
+
+/* ---------- Print styles (A4 直向) ---------- */
+@media print {
+    :root {
+        --bg: #fff;
+        --ink: #000;
+        --muted: #333;
+        --accent: #000;
+        --accent-ink: #000;
+        --card: #fff;
+        --code-bg: #f3f3f3;
+        --border: #ccc;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+
+    .page {
+        max-width: 800px;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* 避免圖片被裁切 */
+    img {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ---------- Nice little details ---------- */
+/* 首段引導：微下底線讓重點標籤（Name、Goal 等）更跳 */
+p>strong:first-child {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+}
+
+/* 讓第一個 H1 前後的視覺留白在不同裝置上都舒服 */
+@media (min-width: 960px) {
+    .page {
+        margin-top: 64px;
+    }
+}
